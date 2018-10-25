@@ -30,25 +30,28 @@
 import {
   isvalidUsername
 } from '@/utils/validate'
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
     const validateUsername = (rule, value, callback) => {
       if (!isvalidUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('请输入正确的用户名，例如：admin 或者 editor'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码个数不能小于6位'))
       } else {
         callback()
       }
     }
     return {
       labelPosition: 'left',
+      token: '',
       loginForm: {
         username: '',
         password: ''
@@ -80,13 +83,23 @@ export default {
     userLogin () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          console.log('success submit!!')
+          this.$router.push({
+            path: `/dashboard/`
+          })
+          this.token = this.loginForm.username + this.loginForm.password
+          this.setInfo(this.loginForm)
+          this.setToken(this.token)
+          window.localStorage.setItem('X-token', this.token)
         } else {
           console.log('error submit!!')
           return false
         }
       })
-    }
+    },
+    ...mapMutations({
+      setInfo: 'SET_USERINFO',
+      setToken: 'SET_TOKEN'
+    })
   }
 }
 </script>
