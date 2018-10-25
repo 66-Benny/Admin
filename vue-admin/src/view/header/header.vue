@@ -1,32 +1,48 @@
 <template>
     <div class="header">
         <div class="iconfont navShowide" @click="navShowHide" :class="{arrow_down:isShowHide}">&#xec0b;</div>
+         {{ 'No Data To Show' | translate }}
+        <el-select v-model="value" :placeholder="langauage" @change="changeLang(value)">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+        </el-select>
     </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import {
   mapGetters,
   mapMutations
 } from 'vuex'
+
 export default {
   name: 'dashboardHeader',
   data () {
     return {
       isCollapse: true,
-      isShowHide: true
+      isShowHide: true,
+      options: [{
+        value: 'zh',
+        label: '中文'
+      }, {
+        value: 'en',
+        label: 'English'
+      }],
+      value: '',
+      langauage: '语言'
     }
   },
+  created () {
+    Vue.i18n.set('en')
+  },
   methods: {
-    navShow () {
-      this.set_navShowHide(false)
-    },
-    navHide () {
-      this.set_navShowHide(true)
-    },
     navShowHide () {
       this.isShowHide = !this.isShowHide
       this.set_navShowHide(this.isShowHide)
+    },
+    changeLang (value) {
+      console.log(value)
     },
     ...mapMutations({
       set_navShowHide: 'navShowHide'
