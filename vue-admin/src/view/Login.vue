@@ -84,12 +84,14 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.$router.push({
-            path: `/dashboard/`
+            path: `/RoleAll/`
           })
           this.token = this.loginForm.username + this.loginForm.password
           this.setInfo(this.loginForm)
           this.setToken(this.token)
+          this.setRole(this.loginForm.username)
           window.localStorage.setItem('X-token', this.token)
+          window.localStorage.setItem('UserRolr', this.loginForm.username)
         } else {
           console.log('error submit!!')
           return false
@@ -98,7 +100,8 @@ export default {
     },
     ...mapMutations({
       setInfo: 'SET_USERINFO',
-      setToken: 'SET_TOKEN'
+      setToken: 'SET_TOKEN',
+      setRole: 'SET_ROLE'
     })
   }
 }

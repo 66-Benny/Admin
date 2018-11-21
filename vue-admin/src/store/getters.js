@@ -2,3 +2,4 @@
 export const userinfo = state => state.userinfo
 export const userToken = state => state.userToken
 export const navShowHide = state => state.navShowHide
+export const userrole = state => state.userrole

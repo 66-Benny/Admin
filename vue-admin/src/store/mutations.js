@@ -8,8 +8,11 @@ const mutations = {
   [types.SET_TOKEN] (state, token) {
     state.userToken = token
   },
-  [types.navShowHide] (state, showHide) {
+  [types.SET_NAVSHOWHIDE] (state, showHide) {
     state.navShowHide = showHide
+  },
+  [types.SET_ROLE] (state, role) {
+    state.userrole = role
   }
 }
 

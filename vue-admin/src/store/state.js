@@ -2,6 +2,7 @@
 const state = {
   userinfo: {},
   userToken: '',
-  navShowHide: true
+  navShowHide: true,
+  userrole: ''
 }
 export default state

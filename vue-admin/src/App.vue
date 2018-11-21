@@ -1,21 +1,36 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="nav">
+      <nav-menu></nav-menu>
+      <Header></Header>
+    </div>
+    <div class="main">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
 <script>
+import navMenu from './view/navMenu/navMenu'
+import Header from './view/header/header'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    navMenu,
+    Header
+  }
 }
 </script>
 
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.nav {
+  display: flex;
 }
 </style>
